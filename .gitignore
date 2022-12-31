@@ -1,5 +1,5 @@
 # Django Secret Key
-# secrets.json
+secrets.json
 # aws
 .ssh/
 
