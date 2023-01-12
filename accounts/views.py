@@ -42,8 +42,13 @@ class KakaoSignInCallBackView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
         # auth_code = request.GET.get('code')
+        print(request.data)
+        print(request.data.get('code'))
         auth_code = request.data.get('code')
 
+
+        print(SOCIAL_OUTH_CONFIG['KAKAO_REST_API_KEY'])
+        print(SOCIAL_OUTH_CONFIG['KAKAO_REDIRECT_URI'])
         kakao_token_api = 'https://kauth.kakao.com/oauth/token'
         data = {
             'grant_type': 'authorization_code',
