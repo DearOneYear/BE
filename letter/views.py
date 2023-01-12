@@ -59,7 +59,8 @@ class LetterList(APIView):
 
         travel_day = calc_dday.days + 1
         print(travel_day)
-        # image 확장자 검사        
+        # image 확장자 검사     
+   
         print(request.FILES.get('file'))
         if request.FILES.get('file'):
             image = request.FILES.get('file')
@@ -70,7 +71,6 @@ class LetterList(APIView):
             if not ext in allowed_ext:
                 return Response({"msg":'허용된 확장자가 아닙니다.'}, staus = status.HTTP_400_BAD_REQUEST)
             
-       
         letter = Letter.objects.create(
             author = author,
             from_name = data['from_name'],
@@ -84,7 +84,7 @@ class LetterList(APIView):
             image = image # 확장자 검사 통과한 경우에만 serializer에 추가
         )
 
-        print(data)
+        print('-----', data)
         serializer = LetterSerializer(letter)
         print(serializer.data)
         # if serializer.is_valid():

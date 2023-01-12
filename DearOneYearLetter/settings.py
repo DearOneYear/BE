@@ -22,21 +22,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # secret.json
-secret_file = os.path.join(BASE_DIR, 'secrets.json')  # secrets.json 파일 위치를 명시
+# secret_file = os.path.join(BASE_DIR, 'secrets.json')  # secrets.json 파일 위치를 명시
 
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
+# with open(secret_file) as f:
+#     secrets = json.loads(f.read())
 
-def get_secret(setting):
-    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+# def get_secret(setting):
+#     """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         error_msg = "Set the {} environment variable".format(setting)
+#         raise ImproperlyConfigured(error_msg)
+
+# SECRET_KEY = get_secret("SECRET_KEY")
+def get_env_variable(var_name):
     try:
-        return secrets[setting]
+        return os.environ[var_name]
     except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
+        error_msg = 'Set the {} environment variable'.format(var_name)
         raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY = get_secret("SECRET_KEY")
-
+SECRET_KEY = get_env_variable('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -68,11 +75,16 @@ INSTALLED_APPS = [
     # 'accounts', 
 ]
 
+# SOCIAL_OUTH_CONFIG = {
+#     # 'KAKAO_REST_API_KEY' : get_secret("KAKAO_REST_API_KEY"),
+#     # 'KAKAO_REDIRECT_URI' : get_secret("KAKAO_REDIRECT_URI"),
+#     # 'KAKAO_SECRET_KEY' : get_secret("KAKAO_SECRET_KEY")
+# }
+
 SOCIAL_OUTH_CONFIG = {
-    'KAKAO_REST_API_KEY' : get_secret("KAKAO_REST_API_KEY"),
-    'KAKAO_REDIRECT_URI' : get_secret("KAKAO_REDIRECT_URI"),
-    # 'KAKAO_SECRET_KEY' : get_secret("KAKAO_SECRET_KEY")
+    'KAKAO_REST_API_KEY' : get_env_variable("KAKAO_REST_API_KEY"),
 }
+
 
 SITE_ID = 1
 
@@ -134,7 +146,7 @@ WSGI_APPLICATION = 'DearOneYearLetter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / get_env_variable('DATABASE'), # BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -174,6 +186,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Media files - 업로드를 하는 URL과 디렉토리 설정
 MEDIA_URL = '/uploads/' # 업로드 할 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads') #로컬 디렉토리 어디에 저장할 것인지
@@ -186,7 +199,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # cors 설정(다른 포트 간의 소통을 위해)
 # React 포트 번호 물어보자...
-CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500', 'http://localhost:5500', 'http://localhost:8000', 'http://localhost:3000', 'http://localhost:3001', 'https://web-dearoneyear-cf24lcbtczhq.gksl2.cloudtype.app/']
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500', 'http://localhost:5500', 'http://localhost:8000', 'http://localhost:3000', 'http://localhost:3001']
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = (
