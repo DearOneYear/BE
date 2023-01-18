@@ -281,4 +281,4 @@ SIMPLE_JWT = {
 
 }
 
-CSRF_TRUSTED_ORIGINS = ['https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/']
+CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
