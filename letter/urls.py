@@ -25,6 +25,6 @@ from django.urls import re_path
 urlpatterns = [
     path('letterbox/', LetterList.as_view()),
     path('letter/', LetterDetail.as_view()),
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}), # for deploy
+    re_path(r'^uploads/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}), # for deploy
     re_path(r'^static/(?:.*)$', serve, {'document_root': settings.STATIC_ROOT, }),  # for deploy
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

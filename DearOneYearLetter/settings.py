@@ -37,6 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY = get_secret("SECRET_KEY")
 
+# for deploy
 def get_env_variable(var_name):
     try:
         return os.environ[var_name]
@@ -83,6 +84,7 @@ INSTALLED_APPS = [
 #     # 'KAKAO_SECRET_KEY' : get_secret("KAKAO_SECRET_KEY")
 # }
 
+# for deploy
 SOCIAL_OUTH_CONFIG = {
     'KAKAO_REST_API_KEY' : get_env_variable("KAKAO_REST_API_KEY"),
      'KAKAO_REDIRECT_URI' : get_env_variable("KAKAO_REDIRECT_URI"),
