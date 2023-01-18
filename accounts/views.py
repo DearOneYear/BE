@@ -30,7 +30,7 @@ class KakaoSignInView(APIView):
         # redirect_uri = SOCIAL_OUTH_CONFIG['KAKAO_REDIRECT_URI']
 
         # redirect_uri = "http://localhost:3000/login/"
-        redirect_uri = "https://web-dearoneyear-cf24lcbtczhq.gksl2.cloudtype.app/login/" # for deploy
+        redirect_uri = "https://deartomorrow.me/login/" # for deploy
         print(redirect_uri)
         kakao_auth_api = "https://kauth.kakao.com/oauth/authorize?response_type=code"
 
