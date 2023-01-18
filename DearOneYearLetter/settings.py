@@ -280,3 +280,5 @@ SIMPLE_JWT = {
     # 'TOKEN_USER_CLASS': 'accounts.User',
 
 }
+
+CSRF_TRUSTED_ORIGINS = ['https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/']
