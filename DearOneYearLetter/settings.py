@@ -52,7 +52,7 @@ SECRET_KEY = get_env_variable('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://port-0-dearoneyearbe-cf24lcbtczhq.gksl2.cloudtype.app/']
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
