@@ -20,6 +20,8 @@ from datetime import timedelta
 import datetime
 from pytz import timezone, utc
 import json
+# email
+from django.core.mail import EmailMessage
 # Create your views here.
 class LetterList(APIView):
     permission_classes = (AllowAny,)
@@ -138,24 +140,13 @@ class LetterDetail(APIView):
 class LetterDeliever(APIView):
     permission_classes = [AllowAny,]
     def get(self, request):
-        print(request.headers)
-        pk = request.headers.get('Letterid')
-        letter = Letter.objects.get(pk=pk)
-
-        deliever = LetterDeliever.objects.filter(letter=letter)
-        if deliever.exists():
-            recipient_email = deliever[0].recipient_email
-            return Response({"msg":"success", "recipient_email":recipient_email, "result":True}, status = status.HTTP_200_OK)
-        return Response({"msg":"Failed to find letter deliever object."}, status = status.HTTP_400_BAD_REQUEST)
-    
-    def post(self, request):
-        # email = request.headers.get('email').split(' ')[-1]
-        # pk = request.headers.get('letterid')
-
-        # letter = Letter.objects.get(pk=pk)       
-        # serializer = LetterDelieverySerializer(letter = letter, recipient_email = email)
-        serializer = LetterDelieverySerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"msg":"Letter recipient's email is saved."}, status=status.HTTP_200_OK)
-        return Response({"msg":"Failed to save recipient's email"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        email = EmailMessage(
+            subject='Test', # Email Title
+            body='Email testing', # Email Content
+            to=['dear.one.year@gmail.com', 'psych.dobby@gmail.com'], # Email recipients
+        )
+        result = email.send()
+        if result == 1:
+            return Response({'msg':'Email sent!'}, status = status.HTTP_200_OK)
+        return Response({'msg':'Email sending failed...'}, status = status.HTTP_400_BAD_REQUEST)

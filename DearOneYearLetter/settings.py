@@ -92,6 +92,14 @@ SOCIAL_OUTH_CONFIG = {
      'KAKAO_REDIRECT_URI' : get_env_variable("KAKAO_REDIRECT_URI"),
 }
 
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER =  'dear.one.year@gmail.com' # gmail account
+EMAIL_HOST_PASSWORD = get_env_variable('EMAIL_HOST_PASSWORD')# app password
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SITE_ID = 1
 
