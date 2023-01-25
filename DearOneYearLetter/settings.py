@@ -52,7 +52,8 @@ SECRET_KEY = get_env_variable('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".cloudtype.app"]
+CSRF_TRUSTED_ORIGINS = ['https://*.cloudtype.app']
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -89,7 +90,7 @@ INSTALLED_APPS = [
 # for deploy
 SOCIAL_OUTH_CONFIG = {
     'KAKAO_REST_API_KEY' : get_env_variable("KAKAO_REST_API_KEY"),
-     'KAKAO_REDIRECT_URI' : get_env_variable("KAKAO_REDIRECT_URI"),
+    'KAKAO_REDIRECT_URI' : get_env_variable("KAKAO_REDIRECT_URI"),
 }
 
 # email
